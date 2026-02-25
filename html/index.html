@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QB Clothing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+<div id="nui-wrapper">
+<div id="app">
+
+    <!-- Header -->
+    <div class="header">
+        <div class="header-top">
+            <div class="brand">
+                <div class="brand-icon"><i class="fas fa-shirt"></i></div>
+                <span class="brand-name">Wardrobe</span>
+            </div>
+            <div class="rotate-inline">
+                <button class="rotate-btn" data-rotation="up"><i class="fas fa-chevron-up"></i></button>
+                <span class="rotate-label">Rotate</span>
+                <button class="rotate-btn" data-rotation="down"><i class="fas fa-chevron-down"></i></button>
+            </div>
+        </div>
+
+        <!-- Camera zone tabs -->
+        <div class="view-tabs">
+            <button class="view-tab active" data-cam="0">
+                <i class="fas fa-child"></i><span>Full</span>
+            </button>
+            <button class="view-tab" data-cam="1">
+                <i class="fas fa-face-smile"></i><span>Face</span>
+            </button>
+            <button class="view-tab" data-cam="2">
+                <i class="fas fa-shirt"></i><span>Upper</span>
+            </button>
+            <button class="view-tab" data-cam="3">
+                <i class="fas fa-socks"></i><span>Lower</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Section Nav — tabs injected here by script on Open() -->
+    <div class="section-nav" id="sectionNav"></div>
+
+    <!-- Content panels -->
+    <div class="content" id="contentArea">
+
+        <!-- ═══ CHARACTER panel ═══════════════════════════════════ -->
+        <div class="section-panel" id="panel-character">
+
+            <p class="section-heading">Character Model</p>
+            <div class="option-row" data-type="model" id="player_model">
+                <div class="option-label">Model</div>
+                <div class="option-controls">
+                    <button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button>
+                    <input type="number" class="ctrl-value item-number" data-type="item" value="1">
+                    <button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button>
+                </div>
+                <div class="current-model-label" id="current-model"></div>
+            </div>
+
+            <p class="section-heading">Heritage</p>
+            <div class="option-row" data-type="face" id="face">
+                <div class="option-label">Mother</div>
+                <div class="option-controls">
+                    <button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button>
+                    <input type="number" class="ctrl-value item-number" data-type="item" value="0">
+                    <button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button>
+                </div>
+                <div class="option-sub">
+                    <div class="option-sub-label" data-headertype="texture-header">Skin Color</div>
+                    <div class="option-controls">
+                        <button class="ctrl-btn qb-left" data-type="texture"><i class="fas fa-angle-left"></i></button>
+                        <input type="number" class="ctrl-value item-number" data-type="texture" value="0">
+                        <button class="ctrl-btn qb-right" data-type="texture"><i class="fas fa-angle-right"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="option-row" data-type="face2" id="face2">
+                <div class="option-label">Father</div>
+                <div class="option-controls">
+                    <button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button>
+                    <input type="number" class="ctrl-value item-number" data-type="item" value="0">
+                    <button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button>
+                </div>
+                <div class="option-sub">
+                    <div class="option-sub-label" data-headertype="texture-header">Skin Color</div>
+                    <div class="option-controls">
+                        <button class="ctrl-btn qb-left" data-type="texture"><i class="fas fa-angle-left"></i></button>
+                        <input type="number" class="ctrl-value item-number" data-type="texture" value="0">
+                        <button class="ctrl-btn qb-right" data-type="texture"><i class="fas fa-angle-right"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <p class="section-heading">Parent Mix</p>
+            <div class="slider-row" data-type="facemix" id="facemix">
+                <div class="slider-label">
+                    <span>Shape Mix</span>
+                    <span class="slider-val" id="shapeMixVal">0.50</span>
+                </div>
+                <input type="range" data-type="shapeMix" class="item-number qb-slider" min="0" step="0.01" max="0.99" value="0.5" id="shapeMix" oninput="document.getElementById('shapeMixVal').textContent=parseFloat(this.value).toFixed(2)">
+                <div class="slider-poles"><span>Mother</span><span>Father</span></div>
+                <div class="slider-label" style="margin-top:14px">
+                    <span>Skin Mix</span>
+                    <span class="slider-val" id="skinMixVal">0.50</span>
+                </div>
+                <input type="range" data-type="skinMix" class="item-number qb-slider" min="0" step="0.01" max="0.99" value="0.5" id="skinMix" oninput="document.getElementById('skinMixVal').textContent=parseFloat(this.value).toFixed(2)">
+                <div class="slider-poles"><span>Mother</span><span>Father</span></div>
+            </div>
+
+            <p class="section-heading">Face Features</p>
+            <div class="option-row" data-type="nose_0"><div class="option-label">Nose Width</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="item" value="0"><button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button></div></div>
+            <div class="option-row" data-type="nose_1"><div class="option-label">Nose Height</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="item" value="0"><button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button></div></div>
+            <div class="option-row" data-type="nose_2"><div class="option-label">Nose Length</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="item" value="0"><button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button></div></div>
+            <div class="option-row" data-type="nose_3"><div class="option-label">Nose Bone Height</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="item" value="0"><button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button></div></div>
+            <div class="option-row" data-type="nose_4"><div class="option-label">Nose Lowering</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="item" value="0"><button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button></div></div>
+            <div class="option-row" data-type="nose_5"><div class="option-label">Nose Twist</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="item" value="0"><button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button></div></div>
+            <div class="option-row" data-type="eyebrown_high"><div class="option-label">Eyebrow Height</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="item" value="0"><button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button></div></div>
+            <div class="option-row" data-type="eyebrown_forward"><div class="option-label">Eyebrow Depth</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="item" value="0"><button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button></div></div>
+            <div class="option-row" data-type="cheek_1"><div class="option-label">Cheeks Height</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="item" value="0"><button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button></div></div>
+            <div class="option-row" data-type="cheek_2"><div class="option-label">Cheeks Width</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="item" value="0"><button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button></div></div>
+            <div class="option-row" data-type="cheek_3"><div class="option-label">Cheeks Depth</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="item" value="0"><button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button></div></div>
+            <div class="option-row" data-type="eye_opening"><div class="option-label">Eyes Opening</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="item" value="0"><button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button></div></div>
+            <div class="option-row" data-type="lips_thickness"><div class="option-label">Lips Thickness</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="item" value="0"><button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button></div></div>
+            <div class="option-row" data-type="jaw_bone_width"><div class="option-label">Jaw Width</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="item" value="0"><button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button></div></div>
+            <div class="option-row" data-type="jaw_bone_back_lenght"><div class="option-label">Jaw Length</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="item" value="0"><button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button></div></div>
+            <div class="option-row" data-type="chimp_bone_lowering"><div class="option-label">Chin Height</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="item" value="0"><button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button></div></div>
+            <div class="option-row" data-type="chimp_bone_lenght"><div class="option-label">Chin Length</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="item" value="0"><button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button></div></div>
+            <div class="option-row" data-type="chimp_bone_width"><div class="option-label">Chin Width</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="item" value="0"><button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button></div></div>
+            <div class="option-row" data-type="chimp_hole"><div class="option-label">Butt Chin</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="item" value="0"><button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button></div></div>
+            <div class="option-row" data-type="neck_thikness"><div class="option-label">Neck Thickness</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="item" value="0"><button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button></div></div>
+        </div>
+
+        <!-- ═══ HAIR panel ════════════════════════════════════════ -->
+        <div class="section-panel" id="panel-hair">
+
+            <p class="section-heading">Eye Color</p>
+            <div class="option-row" data-type="eye_color">
+                <div class="option-label">Eye Color</div>
+                <div class="option-controls">
+                    <button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button>
+                    <input type="number" class="ctrl-value item-number" data-type="item" value="0">
+                    <button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button>
+                </div>
+            </div>
+
+            <p class="section-heading">Skin Details</p>
+            <div class="option-row" data-type="moles">
+                <div class="option-label">Moles / Freckles</div>
+                <div class="option-controls">
+                    <button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button>
+                    <input type="number" class="ctrl-value item-number" data-type="item" value="0">
+                    <button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button>
+                </div>
+                <div class="option-sub">
+                    <div class="option-sub-label" data-headertype="texture-header">Opacity</div>
+                    <div class="option-controls">
+                        <button class="ctrl-btn qb-left" data-type="texture"><i class="fas fa-angle-left"></i></button>
+                        <input type="number" class="ctrl-value item-number" data-type="texture" value="0">
+                        <button class="ctrl-btn qb-right" data-type="texture"><i class="fas fa-angle-right"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="option-row" data-type="ageing">
+                <div class="option-label">Ageing</div>
+                <div class="option-controls">
+                    <button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button>
+                    <input type="number" class="ctrl-value item-number" data-type="item" value="0">
+                    <button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button>
+                </div>
+                <div class="option-sub">
+                    <div class="option-sub-label" data-headertype="texture-header">Opacity</div>
+                    <div class="option-controls">
+                        <button class="ctrl-btn qb-left" data-type="texture"><i class="fas fa-angle-left"></i></button>
+                        <input type="number" class="ctrl-value item-number" data-type="texture" value="0">
+                        <button class="ctrl-btn qb-right" data-type="texture"><i class="fas fa-angle-right"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <p class="section-heading">Hair</p>
+            <div class="option-row" data-type="hair">
+                <div class="option-label">Hairstyle</div>
+                <div class="option-controls">
+                    <button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button>
+                    <input type="number" class="ctrl-value item-number" data-type="item" value="0">
+                    <button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button>
+                </div>
+                <div class="option-sub">
+                    <div class="option-sub-label" data-headertype="texture-header">Color</div>
+                    <div class="option-controls">
+                        <button class="ctrl-btn qb-left" data-type="texture"><i class="fas fa-angle-left"></i></button>
+                        <input type="number" class="ctrl-value item-number" data-type="texture" value="0">
+                        <button class="ctrl-btn qb-right" data-type="texture"><i class="fas fa-angle-right"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="option-row" data-type="eyebrows">
+                <div class="option-label">Eyebrows</div>
+                <div class="option-controls">
+                    <button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button>
+                    <input type="number" class="ctrl-value item-number" data-type="item" value="0">
+                    <button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button>
+                </div>
+                <div class="option-sub">
+                    <div class="option-sub-label" data-headertype="texture-header">Color</div>
+                    <div class="option-controls">
+                        <button class="ctrl-btn qb-left" data-type="texture"><i class="fas fa-angle-left"></i></button>
+                        <input type="number" class="ctrl-value item-number" data-type="texture" value="0">
+                        <button class="ctrl-btn qb-right" data-type="texture"><i class="fas fa-angle-right"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="option-row" data-type="beard">
+                <div class="option-label">Facial Hair</div>
+                <div class="option-controls">
+                    <button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button>
+                    <input type="number" class="ctrl-value item-number" data-type="item" value="0">
+                    <button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button>
+                </div>
+                <div class="option-sub">
+                    <div class="option-sub-label" data-headertype="texture-header">Color</div>
+                    <div class="option-controls">
+                        <button class="ctrl-btn qb-left" data-type="texture"><i class="fas fa-angle-left"></i></button>
+                        <input type="number" class="ctrl-value item-number" data-type="texture" value="0">
+                        <button class="ctrl-btn qb-right" data-type="texture"><i class="fas fa-angle-right"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <p class="section-heading">Makeup</p>
+            <div class="option-row" data-type="lipstick">
+                <div class="option-label">Lipstick</div>
+                <div class="option-controls">
+                    <button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button>
+                    <input type="number" class="ctrl-value item-number" data-type="item" value="0">
+                    <button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button>
+                </div>
+                <div class="option-sub">
+                    <div class="option-sub-label" data-headertype="texture-header">Color</div>
+                    <div class="option-controls">
+                        <button class="ctrl-btn qb-left" data-type="texture"><i class="fas fa-angle-left"></i></button>
+                        <input type="number" class="ctrl-value item-number" data-type="texture" value="0">
+                        <button class="ctrl-btn qb-right" data-type="texture"><i class="fas fa-angle-right"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="option-row" data-type="blush">
+                <div class="option-label">Blush</div>
+                <div class="option-controls">
+                    <button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button>
+                    <input type="number" class="ctrl-value item-number" data-type="item" value="0">
+                    <button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button>
+                </div>
+                <div class="option-sub">
+                    <div class="option-sub-label" data-headertype="texture-header">Color</div>
+                    <div class="option-controls">
+                        <button class="ctrl-btn qb-left" data-type="texture"><i class="fas fa-angle-left"></i></button>
+                        <input type="number" class="ctrl-value item-number" data-type="texture" value="0">
+                        <button class="ctrl-btn qb-right" data-type="texture"><i class="fas fa-angle-right"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="option-row" data-type="makeup">
+                <div class="option-label">Makeup</div>
+                <div class="option-controls">
+                    <button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button>
+                    <input type="number" class="ctrl-value item-number" data-type="item" value="0">
+                    <button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button>
+                </div>
+                <div class="option-sub">
+                    <div class="option-sub-label" data-headertype="texture-header">Color</div>
+                    <div class="option-controls">
+                        <button class="ctrl-btn qb-left" data-type="texture"><i class="fas fa-angle-left"></i></button>
+                        <input type="number" class="ctrl-value item-number" data-type="texture" value="0">
+                        <button class="ctrl-btn qb-right" data-type="texture"><i class="fas fa-angle-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ CLOTHING panel ════════════════════════════════════ -->
+        <div class="section-panel" id="panel-clothing">
+            <p class="section-heading">Tops</p>
+            <div class="option-row" data-type="arms"><div class="option-label">Arms</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="item" value="0"><button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button></div><div class="option-sub"><div class="option-sub-label" data-headertype="texture-header">Texture</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="texture"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="texture" value="0"><button class="ctrl-btn qb-right" data-type="texture"><i class="fas fa-angle-right"></i></button></div></div></div>
+            <div class="option-row" data-type="t-shirt"><div class="option-label">Undershirt / Belts</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="item" value="0"><button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button></div><div class="option-sub"><div class="option-sub-label" data-headertype="texture-header">Color</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="texture"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="texture" value="0"><button class="ctrl-btn qb-right" data-type="texture"><i class="fas fa-angle-right"></i></button></div></div></div>
+            <div class="option-row" data-type="torso2"><div class="option-label">Jacket / Tops</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="item" value="0"><button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button></div><div class="option-sub"><div class="option-sub-label" data-headertype="texture-header">Color</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="texture"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="texture" value="0"><button class="ctrl-btn qb-right" data-type="texture"><i class="fas fa-angle-right"></i></button></div></div></div>
+            <div class="option-row" data-type="vest"><div class="option-label">Vest</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="item" value="0"><button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button></div><div class="option-sub"><div class="option-sub-label" data-headertype="texture-header">Texture</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="texture"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="texture" value="0"><button class="ctrl-btn qb-right" data-type="texture"><i class="fas fa-angle-right"></i></button></div></div></div>
+            <div class="option-row" data-type="decals"><div class="option-label">Decals</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="item" value="0"><button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button></div><div class="option-sub"><div class="option-sub-label" data-headertype="texture-header">Texture</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="texture"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="texture" value="0"><button class="ctrl-btn qb-right" data-type="texture"><i class="fas fa-angle-right"></i></button></div></div></div>
+            <div class="option-row" data-type="accessory"><div class="option-label">Neck Accessory</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="item" value="0"><button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button></div><div class="option-sub"><div class="option-sub-label" data-headertype="texture-header">Texture</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="texture"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="texture" value="0"><button class="ctrl-btn qb-right" data-type="texture"><i class="fas fa-angle-right"></i></button></div></div></div>
+            <p class="section-heading">Bottoms</p>
+            <div class="option-row" data-type="bag"><div class="option-label">Bag</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="item" value="0"><button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button></div><div class="option-sub"><div class="option-sub-label" data-headertype="texture-header">Texture</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="texture"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="texture" value="0"><button class="ctrl-btn qb-right" data-type="texture"><i class="fas fa-angle-right"></i></button></div></div></div>
+            <div class="option-row" data-type="pants"><div class="option-label">Pants</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="item" value="0"><button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button></div><div class="option-sub"><div class="option-sub-label" data-headertype="texture-header">Texture</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="texture"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="texture" value="0"><button class="ctrl-btn qb-right" data-type="texture"><i class="fas fa-angle-right"></i></button></div></div></div>
+            <div class="option-row" data-type="shoes"><div class="option-label">Shoes</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="item" value="0"><button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button></div><div class="option-sub"><div class="option-sub-label" data-headertype="texture-header">Texture</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="texture"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="texture" value="0"><button class="ctrl-btn qb-right" data-type="texture"><i class="fas fa-angle-right"></i></button></div></div></div>
+        </div>
+
+        <!-- ═══ ACCESSORIES panel ═════════════════════════════════ -->
+        <div class="section-panel" id="panel-accessoires">
+            <p class="section-heading">Head</p>
+            <div class="option-row" data-type="mask"><div class="option-label">Mask</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="item" value="0"><button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button></div><div class="option-sub"><div class="option-sub-label" data-headertype="texture-header">Texture</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="texture"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="texture" value="0"><button class="ctrl-btn qb-right" data-type="texture"><i class="fas fa-angle-right"></i></button></div></div></div>
+            <div class="option-row" data-type="hat"><div class="option-label">Hat</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="item" value="0"><button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button></div><div class="option-sub"><div class="option-sub-label" data-headertype="texture-header">Texture</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="texture"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="texture" value="0"><button class="ctrl-btn qb-right" data-type="texture"><i class="fas fa-angle-right"></i></button></div></div></div>
+            <div class="option-row" data-type="glass"><div class="option-label">Glasses</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="item" value="0"><button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button></div><div class="option-sub"><div class="option-sub-label" data-headertype="texture-header">Texture</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="texture"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="texture" value="0"><button class="ctrl-btn qb-right" data-type="texture"><i class="fas fa-angle-right"></i></button></div></div></div>
+            <p class="section-heading">Jewellery</p>
+            <div class="option-row" data-type="ear"><div class="option-label">Ear Accessories</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="item" value="0"><button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button></div><div class="option-sub"><div class="option-sub-label" data-headertype="texture-header">Texture</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="texture"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="texture" value="0"><button class="ctrl-btn qb-right" data-type="texture"><i class="fas fa-angle-right"></i></button></div></div></div>
+            <div class="option-row" data-type="watch"><div class="option-label">Watch</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="item" value="0"><button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button></div><div class="option-sub"><div class="option-sub-label" data-headertype="texture-header">Texture</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="texture"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="texture" value="0"><button class="ctrl-btn qb-right" data-type="texture"><i class="fas fa-angle-right"></i></button></div></div></div>
+            <div class="option-row" data-type="bracelet"><div class="option-label">Bracelet</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="item"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="item" value="0"><button class="ctrl-btn qb-right" data-type="item"><i class="fas fa-angle-right"></i></button></div><div class="option-sub"><div class="option-sub-label" data-headertype="texture-header">Texture</div><div class="option-controls"><button class="ctrl-btn qb-left" data-type="texture"><i class="fas fa-angle-left"></i></button><input type="number" class="ctrl-value item-number" data-type="texture" value="0"><button class="ctrl-btn qb-right" data-type="texture"><i class="fas fa-angle-right"></i></button></div></div></div>
+        </div>
+
+        <!-- ═══ OUTFITS panels (populated by script) ═════════════ -->
+        <div class="section-panel" id="panel-roomOutfits"></div>
+        <div class="section-panel" id="panel-myOutfits"></div>
+
+    </div><!-- /.content -->
+
+    <!-- Footer -->
+    <div class="footer">
+        <button class="btn btn-danger" id="btn-reset">Reset</button>
+        <button class="btn btn-ghost" id="btn-cancel">Cancel</button>
+        <button class="btn btn-ghost" id="save-outfit">Save Outfit</button>
+        <button class="btn btn-primary" id="btn-save">Save</button>
+    </div>
+
+</div><!-- /#app -->
+</div><!-- /#nui-wrapper -->
+
+<!-- Save Outfit Name Modal -->
+<div id="outfit-modal">
+    <div id="outfit-modal-inner">
+        <p id="outfit-modal-title">Name Your Outfit</p>
+        <input type="text" id="outfit-name" placeholder="Outfit name…">
+        <div id="outfit-modal-btns">
+            <button id="save-outfit-save" class="btn btn-primary">Confirm</button>
+            <button id="cancel-outfit-save" class="btn btn-ghost">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
