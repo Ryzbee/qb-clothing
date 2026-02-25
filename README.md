@@ -131,7 +131,7 @@ Do not resell or redistribute without permission.
 ---
 
 ## ⭐ Credits
-
+QBCORE FRAMEWORK
 RYZE Version
 Based on QB-Core Framework
 
